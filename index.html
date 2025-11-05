@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Interview — Ishan</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Settings Icon -->
+    <div class="settings-icon" id="settingsBtn">
+        <i class="fas fa-gear"></i>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+                <!-- Header -->
+        <div class="header">
+            <h1>Edith</h1>
+            <p class="subtitle">Your Personal Interview Agent</p>
+            <p class="subtitle">By: Ishan Aggawal</p>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-content">
+                <h3>Settings</h3>
+                <div class="setting-item">
+                    <label for="voiceToggle">Voice Enabled</label>
+                    <input type="checkbox" id="voiceToggle" checked>
+                </div>
+                <div class="setting-item">
+                    <label for="themeToggle">Dark Mode</label>
+                    <input type="checkbox" id="themeToggle">
+                </div>
+                <div class="setting-item">
+                    <label for="voiceSpeed">Speech Speed</label>
+                    <input type="range" id="voiceSpeed" min="0.5" max="2" step="0.1" value="1">
+                </div>
+                <button class="close-settings" id="closeSettings">Done</button>
+            </div>
+        </div>
+
+        <!-- Avatar Section -->
+        <div class="avatar-section">
+            <div class="avatar-container">
+                <canvas id="avatarCanvas" width="400" height="400"></canvas>
+            </div>
+            
+            <!-- Status Indicator -->
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-text">Ready</span>
+                <div class="status-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interview Dashboard -->
+        <div class="interview-panel">
+            <h3>Interview Setup</h3>
+            
+            <!-- Step 1: Interview Type Selection -->
+            <div class="interview-type-selection" id="interviewTypeSelection">
+                <p class="selection-label">Select Interview Type:</p>
+                <div class="interview-buttons">
+                    <button class="interview-btn technical" id="technicalBtn">
+                        <i class="fas fa-code"></i>
+                        <span>Technical</span>
+                    </button>
+                    <button class="interview-btn behavioral" id="behavioralBtn">
+                        <i class="fas fa-users"></i>
+                        <span>Behavioral</span>
+                    </button>
+                    <button class="interview-btn coding" id="codingBtn">
+                        <i class="fas fa-terminal"></i>
+                        <span>Coding</span>
+                    </button>
+                    <button class="interview-btn system" id="systemDesignBtn">
+                        <i class="fas fa-diagram-project"></i>
+                        <span>System Design</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Begin Interview Button -->
+            <div class="control-panel">
+                <button class="action-btn interview-btn" id="startInterviewBtn">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Begin Interview</span>
+                </button>
+                <button class="action-btn stop-btn" id="stopInterviewBtn" style="display: none;">
+                    <i class="fas fa-stop-circle"></i>
+                    <span>Stop Interview</span>
+                </button>
+            </div>
+
+            <!-- Step 3: Answer Control (appears during interview) -->
+            <div class="answer-control" id="answerControl" style="display: none;">
+                <button class="action-btn speak-answer-btn" id="speakAnswerBtn">
+                    <i class="fas fa-microphone"></i>
+                    <span>Speak Answer</span>
+                </button>
+                <button class="action-btn stop-speaking-btn" id="stopSpeakingBtn" style="display: none;">
+                    <i class="fas fa-stop"></i>
+                    <span>Stop Speaking</span>
+                </button>
+            </div>
+
+            <!-- Interview Progress Stats -->
+            <div class="interview-stats" id="interview-stats" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-label">Type</span>
+                    <span class="stat-value" id="interviewTypeValue">Not Selected</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Duration</span>
+                    <span class="stat-value" id="durationValue">0m</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Responses</span>
+                    <span class="stat-value" id="responsesValue">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat History -->
+        <div class="chat-panel">
+            <div class="chat-header">
+                <h3>Conversation</h3>
+                <button class="clear-chat" id="clearChat">Clear</button>
+            </div>
+            
+            <div class="chat-messages" id="chat-history">
+                <!-- Messages will appear here -->
+            </div>
+            
+            <!-- Text Input Bar -->
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="textInput" 
+                    class="chat-text-input" 
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                />
+                <button id="sendTextBtn" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Code Editor Panel (Hidden by default) -->
+        <div class="code-editor-panel" id="codeEditorPanel" style="display: none;">
+            <div class="code-editor-header">
+                <h3>Code Editor</h3>
+                <div class="code-editor-controls">
+                    <select id="languageSelect" class="language-select">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="csharp">C#</option>
+                        <option value="go">Go</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="swift">Swift</option>
+                    </select>
+                    <button id="runCodeBtn" class="run-code-btn">
+                        <i class="fas fa-play"></i> Run Code
+                    </button>
+                    <button id="shareCodeBtn" class="share-code-btn">
+                        <i class="fas fa-share"></i> Share with Edith
+                    </button>
+                    <button id="closeEditorBtn" class="close-editor-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="code-editor-container">
+                <textarea 
+                    id="codeEditor" 
+                    class="code-editor"
+                    placeholder="// Write your code here..."
+                    spellcheck="false"
+                ></textarea>
+            </div>
+            
+            <div class="code-output-section">
+                <div class="output-header">
+                    <span>Output</span>
+                    <button id="clearOutputBtn" class="clear-output-btn">Clear</button>
+                </div>
+                <pre id="codeOutput" class="code-output">// Output will appear here...</pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-fixed.js"></script>
+</body>
+</html>

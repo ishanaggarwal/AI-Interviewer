@@ -1,0 +1,1503 @@
+/* ========================
+   CSS Variables & Root Styles - Apple Design System
+   ======================== */
+:root {
+    /* Apple-inspired Light Theme Colors */
+    --primary-color: #0071e3;
+    --primary-hover: #0077ed;
+    --background: #ffffff;
+    --background-secondary: #f5f5f7;
+    --background-tertiary: #fbfbfd;
+    --surface: rgba(255, 255, 255, 0.8);
+    --surface-glass: rgba(255, 255, 255, 0.72);
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #86868b;
+    --accent: #0071e3;
+    --success: #30d158;
+    --warning: #ff9f0a;
+    --error: #ff3b30;
+    --border: rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    
+    /* Spacing - Apple's 4px grid system */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    
+    /* Border Radius - Apple's subtle curves */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-full: 50%;
+    
+    /* Typography */
+    --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+    
+    /* Animations - Apple's smooth transitions */
+    --transition-quick: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme - Apple Dark Mode */
+[data-theme="dark"] {
+    --background: #000000;
+    --background-secondary: #1c1c1e;
+    --background-tertiary: #2c2c2e;
+    --surface: rgba(28, 28, 30, 0.8);
+    --surface-glass: rgba(28, 28, 30, 0.72);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #6e6e73;
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================
+   Base Styles - Apple Typography & Layout
+   ======================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.47059;
+    letter-spacing: -0.022em;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================
+   Container & Layout - Apple Spacious Design
+   ======================== */
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+        padding: var(--spacing-3xl) var(--spacing-xl);
+    }
+}
+
+/* ========================
+   Header Styles - Apple Clean Header
+   ======================== */
+.header {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.05;
+}
+
+.header p {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: -0.01em;
+}
+
+/* Settings Icon - Apple Style */
+.settings-icon {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 100;
+}
+
+.settings-icon i {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+}
+
+.settings-icon i:hover {
+    color: var(--primary-color);
+    background: var(--surface);
+    transform: rotate(90deg);
+}
+
+/* ========================
+   Settings Panel - Apple Sidebar Style
+   ======================== */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--surface-glass);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    padding: var(--spacing-2xl);
+    transition: right var(--transition-smooth);
+    z-index: 1000;
+    border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+}
+
+.settings-panel.active {
+    right: 0;
+}
+
+.settings-content h3 {
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-primary);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--background-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    transition: all var(--transition-quick);
+}
+
+.setting-item:hover {
+    background: var(--background-tertiary);
+    transform: translateY(-1px);
+}
+
+.setting-item label {
+    font-weight: 400;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 51px;
+    height: 31px;
+    appearance: none;
+    background: var(--text-tertiary);
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: background var(--transition-quick);
+}
+
+.setting-item input[type="checkbox"]:checked {
+    background: var(--success);
+}
+
+.setting-item input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06);
+    top: 2px;
+    left: 2px;
+    transition: transform var(--transition-quick);
+}
+
+.setting-item input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}
+
+.setting-item input[type="range"] {
+    width: 120px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    appearance: none;
+    cursor: pointer;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+}
+
+.close-settings {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: var(--spacing-xl);
+    transition: all var(--transition-quick);
+}
+
+.close-settings:hover {
+    background: var(--primary-hover);
+}
+
+.close-settings:active {
+    transform: scale(0.98);
+}
+
+/* ========================
+   Avatar Section - Apple Minimalist Design
+   ======================== */
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+    margin: var(--spacing-2xl) 0;
+}
+
+.avatar-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avatarCanvas {
+    border-radius: var(--radius-xl);
+    background: #000000; /* Dark space background for cosmic entity */
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    cursor: pointer;
+}
+
+#avatarCanvas:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 200, 255, 0.2), 
+                0 4px 12px rgba(236, 72, 153, 0.15);
+}
+
+#avatarCanvas:active {
+    transform: scale(0.98);
+}
+
+.avatar-glow {
+    display: none; /* Remove glow for minimalist Apple design */
+}
+
+/* ========================
+   Status Indicator - Apple Pill Style
+   ======================== */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--background-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.status-text {
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+}
+
+.status-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    animation: dotPulse 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Status States */
+.status-indicator.listening .status-text {
+    color: var(--success);
+}
+
+.status-indicator.listening .dot {
+    background: var(--success);
+}
+
+.status-indicator.thinking .status-text {
+    color: var(--primary-color);
+}
+
+.status-indicator.thinking .dot {
+    background: var(--primary-color);
+}
+
+.status-indicator.speaking .status-text {
+    color: var(--primary-color);
+}
+
+.status-indicator.speaking .dot {
+    background: var(--primary-color);
+}
+
+/* ========================
+   Control Panel - Apple Button Style
+   ======================== */
+.control-panel {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 13px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all var(--transition-quick);
+    min-width: 140px;
+    justify-content: center;
+    font-family: var(--font-body);
+    letter-spacing: -0.01em;
+}
+
+.action-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
+.interview-btn {
+    background: var(--primary-color);
+}
+
+.talk-btn {
+    background: var(--success);
+}
+
+.talk-btn:hover {
+    background: #28c44c;
+}
+
+.stop-btn {
+    background: var(--error);
+}
+
+.stop-btn:hover {
+    background: #ff2d20;
+}
+
+.action-btn i {
+    font-size: 1.125rem;
+}
+
+/* ========================
+   Interview Panel - Apple Card Style
+   ======================== */
+.interview-panel {
+    background: var(--background-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.interview-panel h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.interview-type-selection {
+    margin-bottom: var(--spacing-xl);
+}
+
+.selection-label {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 400;
+}
+
+.interview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border);
+}
+
+.stat-item {
+    background: var(--background-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 400;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.interview-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.interview-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--background-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-quick);
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+
+.interview-btn:hover {
+    background: white;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.interview-btn.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.interview-btn:active {
+    transform: scale(0.98);
+}
+
+.interview-btn i {
+    font-size: 1rem;
+}
+
+.answer-control {
+    margin-top: var(--spacing-lg);
+}
+
+.speak-answer-btn {
+    background: var(--success-color);
+    color: white;
+}
+
+.speak-answer-btn:hover {
+    background: #28a745;
+    color: white;
+    border-color: var(--success-color);
+}
+
+.stop-speaking-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.stop-speaking-btn:hover {
+    background: #c82333;
+    color: white;
+    border-color: #dc3545;
+}
+
+/* ========================
+   Chat Panel - Apple Messages Style
+   ======================== */
+.chat-panel {
+    background: var(--background-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background: var(--background-tertiary);
+    border-bottom: 1px solid var(--border);
+}
+
+.chat-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.clear-chat {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-quick);
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+
+.clear-chat:hover {
+    background: var(--background-secondary);
+}
+
+.clear-chat:active {
+    transform: scale(0.95);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    max-height: 400px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-tertiary) transparent;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+.message {
+    margin-bottom: var(--spacing-lg);
+    animation: messageSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.sender {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.timestamp {
+    color: var(--text-tertiary);
+}
+
+.message-content {
+    background: var(--background-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    position: relative;
+    line-height: 1.47059;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    border: 1px solid var(--border);
+}
+
+.user-message .message-content {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.assistant-message .message-content,
+.bot-message .message-content {
+    background: var(--background-tertiary);
+    color: var(--text-primary);
+}
+
+/* Processing indicator */
+.processing-message .message-content {
+    background: var(--background-tertiary);
+    color: var(--text-secondary);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Code blocks in messages */
+.message-content pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin: var(--spacing-sm) 0;
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.message-content code {
+    background: #1e1e1e;
+    color: #ec4899;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 0.875em;
+}
+
+.message-content pre code {
+    background: none;
+    color: #d4d4d4;
+    padding: 0;
+}
+
+/* ========================
+   Chat Input Container
+   ======================== */
+.chat-input-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--background-tertiary);
+    border-top: 1px solid var(--border);
+    align-items: center;
+}
+
+.chat-text-input {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    transition: all var(--transition-quick);
+    outline: none;
+}
+
+.chat-text-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+}
+
+.chat-text-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.send-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-quick);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    font-size: 1rem;
+}
+
+.send-btn:hover {
+    background: #0077ed;
+    transform: translateY(-1px);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================
+   Code Editor Panel
+   ======================== */
+.code-editor-panel {
+    background: var(--background-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-lg);
+}
+
+.code-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--background-tertiary);
+    border-bottom: 1px solid var(--border);
+}
+
+.code-editor-header h3 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.code-editor-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.language-select {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    cursor: pointer;
+    transition: all var(--transition-quick);
+    outline: none;
+}
+
+.language-select:hover {
+    border-color: var(--primary-color);
+}
+
+.language-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+}
+
+.run-code-btn,
+.share-code-btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition-quick);
+}
+
+.run-code-btn:hover,
+.share-code-btn:hover {
+    background: #0077ed;
+    transform: translateY(-1px);
+}
+
+.run-code-btn:active,
+.share-code-btn:active {
+    transform: scale(0.95);
+}
+
+.share-code-btn {
+    background: #30d158;
+}
+
+.share-code-btn:hover {
+    background: #28c44c;
+}
+
+.close-editor-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-quick);
+}
+
+.close-editor-btn:hover {
+    background: var(--background-secondary);
+    color: var(--text-primary);
+}
+
+.code-editor-container {
+    flex: 1;
+    min-height: 300px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.code-editor {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    padding: var(--spacing-md);
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border: none;
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    tab-size: 4;
+}
+
+.code-editor::placeholder {
+    color: #6a6a6a;
+}
+
+.code-output-section {
+    background: var(--background-tertiary);
+    border-top: 1px solid var(--border);
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--background-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.output-header span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.clear-output-btn {
+    padding: 4px 10px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-quick);
+}
+
+.clear-output-btn:hover {
+    background: var(--background-tertiary);
+}
+
+.code-output {
+    padding: var(--spacing-md);
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-output::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.code-output::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.code-output::-webkit-scrollbar-thumb {
+    background: #424242;
+    border-radius: 4px;
+}
+
+.code-output::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+/* ========================
+   Transcription Display - Apple Live Text Style
+   ======================== */
+.transcription-panel {
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.transcription-panel h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.transcription-text {
+    background: var(--background-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    min-height: 80px;
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    line-height: 1.47059;
+}
+
+/* ========================
+   Responsive Design - Apple Breakpoints
+   ======================== */
+
+.interview-btn.system {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+}
+
+.interview-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.interview-btn:active {
+    transform: translateY(0);
+}
+
+/* Update action buttons for interview context */
+.action-btn.interview-btn {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+}
+
+.action-btn.interview-btn:hover {
+    background: linear-gradient(135deg, #3dd671 0%, #32e6c9 100%);
+}
+
+.message-text {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.5;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Configuration Panel */
+.config-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.config-header:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.config-toggle {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.config-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.config-content {
+    padding: var(--spacing-md);
+    display: none;
+}
+
+.config-content.expanded {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.api-key-container {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.api-key-input {
+    flex: 1;
+    padding: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.api-key-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(118, 75, 162, 0.2);
+}
+
+.save-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background: #8a4fc7;
+    transform: translateY(-1px);
+}
+
+.config-help {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.config-help a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.config-help a:hover {
+    text-decoration: underline;
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.status-dot {
+    font-size: 0.6rem;
+    color: #ff6b6b;
+}
+
+.status-dot.connected {
+    color: #51cf66;
+}
+
+.live-transcription {
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.transcription-label {
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 140px;
+}
+
+.transcription-text {
+    color: var(--text-secondary);
+    font-style: italic;
+    flex: 1;
+}
+
+.transcription-text.active {
+    color: var(--success);
+    animation: textPulse 1s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* ========================
+   Conversation Log
+   ======================== */
+.conversation-log {
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.log-toggle {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--transition-normal);
+}
+
+.log-toggle:hover {
+    background: var(--surface-hover);
+}
+
+.log-toggle i {
+    transition: transform var(--transition-normal);
+}
+
+.log-toggle.active i {
+    transform: rotate(180deg);
+}
+
+.log-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+}
+
+.log-content.active {
+    max-height: 300px;
+}
+
+.log-messages {
+    padding: var(--spacing-md);
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.log-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: var(--spacing-lg);
+}
+
+/* ========================
+   Loading Overlay
+   ======================== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(240, 147, 251, 0.3);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* ========================
+   Responsive Design
+   ======================== */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-md);
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    #avatarCanvas {
+        width: 250px;
+/* ========================
+   Responsive Design - Apple Breakpoints
+   ======================== */
+@media (max-width: 734px) {
+    .container {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .header p {
+        font-size: 1.25rem;
+    }
+    
+    #avatarCanvas {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .settings-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .control-panel {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .action-btn {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .interview-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .interview-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header p {
+        font-size: 1.125rem;
+    }
+    
+    #avatarCanvas {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .chat-panel {
+        min-height: 350px;
+    }
+    
+    .chat-messages {
+        max-height: 250px;
+    }
+}
+
+/* ========================
+   Accessibility - Apple Standards
+   ======================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border: rgba(0, 0, 0, 0.2);
+        --text-secondary: var(--text-primary);
+    }
+    
+    [data-theme="dark"] {
+        --border: rgba(255, 255, 255, 0.3);
+    }
+}
