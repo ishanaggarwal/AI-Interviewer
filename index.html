@@ -32,7 +32,7 @@
                     <input type="checkbox" id="voiceToggle" checked>
                 </div>
                 <div class="setting-item">
-                    <label for="themeToggle">Dark Mode</label>
+                    <label for="themeToggle">Light Mode</label>
                     <input type="checkbox" id="themeToggle">
                 </div>
                 <div class="setting-item">
@@ -46,12 +46,12 @@
         <!-- Avatar Section -->
         <div class="avatar-section">
             <div class="avatar-container">
-                <canvas id="avatarCanvas" width="400" height="400"></canvas>
+                <canvas id="avatarCanvas" width="500" height="500"></canvas>
             </div>
             
             <!-- Status Indicator -->
             <div class="status-indicator" id="statusIndicator">
-                <span class="status-text">Ready</span>
+                <span class="status-text" id="status">Ready</span>
                 <div class="status-dots">
                     <span class="dot"></span>
                     <span class="dot"></span>
@@ -68,19 +68,19 @@
             <div class="interview-type-selection" id="interviewTypeSelection">
                 <p class="selection-label">Select Interview Type:</p>
                 <div class="interview-buttons">
-                    <button class="interview-btn technical" id="technicalBtn">
+                    <button class="interview-btn technical" id="technicalInterview">
                         <i class="fas fa-code"></i>
                         <span>Technical</span>
                     </button>
-                    <button class="interview-btn behavioral" id="behavioralBtn">
+                    <button class="interview-btn behavioral" id="behavioralInterview">
                         <i class="fas fa-users"></i>
                         <span>Behavioral</span>
                     </button>
-                    <button class="interview-btn coding" id="codingBtn">
+                    <button class="interview-btn coding" id="codingInterview">
                         <i class="fas fa-terminal"></i>
                         <span>Coding</span>
                     </button>
-                    <button class="interview-btn system" id="systemDesignBtn">
+                    <button class="interview-btn system" id="systemInterview">
                         <i class="fas fa-diagram-project"></i>
                         <span>System Design</span>
                     </button>
@@ -89,11 +89,11 @@
 
             <!-- Step 2: Begin Interview Button -->
             <div class="control-panel">
-                <button class="action-btn interview-btn" id="startInterviewBtn">
+                <button class="action-btn interview-btn" id="beginInterview">
                     <i class="fas fa-play-circle"></i>
                     <span>Begin Interview</span>
                 </button>
-                <button class="action-btn stop-btn" id="stopInterviewBtn" style="display: none;">
+                <button class="action-btn stop-btn" id="stopInterview" style="display: none;">
                     <i class="fas fa-stop-circle"></i>
                     <span>Stop Interview</span>
                 </button>
@@ -101,11 +101,11 @@
 
             <!-- Step 3: Answer Control (appears during interview) -->
             <div class="answer-control" id="answerControl" style="display: none;">
-                <button class="action-btn speak-answer-btn" id="speakAnswerBtn">
+                <button class="action-btn speak-answer-btn" id="speakAnswer">
                     <i class="fas fa-microphone"></i>
                     <span>Speak Answer</span>
                 </button>
-                <button class="action-btn stop-speaking-btn" id="stopSpeakingBtn" style="display: none;">
+                <button class="action-btn stop-speaking-btn" id="stopSpeaking" style="display: none;">
                     <i class="fas fa-stop"></i>
                     <span>Stop Speaking</span>
                 </button>
@@ -126,6 +126,14 @@
                     <span class="stat-value" id="responsesValue">0</span>
                 </div>
             </div>
+            
+            <!-- Code Editor Toggle -->
+            <div class="code-editor-toggle">
+                <button class="action-btn code-editor-btn" id="toggleCodeEditor">
+                    <i class="fas fa-code"></i>
+                    <span>Open Code Editor</span>
+                </button>
+            </div>
         </div>
 
         <!-- Chat History -->
@@ -135,21 +143,26 @@
                 <button class="clear-chat" id="clearChat">Clear</button>
             </div>
             
-            <div class="chat-messages" id="chat-history">
+            <div class="chat-messages" id="chatHistory">
                 <!-- Messages will appear here -->
             </div>
             
             <!-- Text Input Bar -->
             <div class="chat-input-container">
+                <button id="voiceInput" class="voice-btn" title="Click to speak">
+                    <i class="fas fa-microphone"></i>
+                </button>
                 <input 
                     type="text" 
                     id="textInput" 
                     class="chat-text-input" 
-                    placeholder="Type your message..."
+                    placeholder="Type your message or click mic to speak..."
                     autocomplete="off"
                 />
-                <button id="sendTextBtn" class="send-btn">
+                <button id="sendText" class="send-btn" title="Send message">
                     <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
                 </button>
             </div>
         </div>
@@ -169,13 +182,13 @@
                         <option value="ruby">Ruby</option>
                         <option value="swift">Swift</option>
                     </select>
-                    <button id="runCodeBtn" class="run-code-btn">
+                    <button id="runCode" class="run-code-btn">
                         <i class="fas fa-play"></i> Run Code
                     </button>
-                    <button id="shareCodeBtn" class="share-code-btn">
+                    <button id="shareCode" class="share-code-btn">
                         <i class="fas fa-share"></i> Share with Edith
                     </button>
-                    <button id="closeEditorBtn" class="close-editor-btn">
+                    <button id="closeEditor" class="close-editor-btn">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -193,13 +206,26 @@
             <div class="code-output-section">
                 <div class="output-header">
                     <span>Output</span>
-                    <button id="clearOutputBtn" class="clear-output-btn">Clear</button>
+                    <span id="compilationStatus" class="compilation-status"></span>
+                    <button id="clearOutput" class="clear-output-btn">Clear</button>
                 </div>
                 <pre id="codeOutput" class="code-output">// Output will appear here...</pre>
             </div>
         </div>
     </div>
 
-    <script src="script-fixed.js"></script>
+    <!-- JavaScript Modules -->
+    <script src="js/config.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/interview-prompts.js"></script>
+    <script src="js/leetcode-questions.js"></script>
+    <script src="js/avatar.js"></script>
+    <script src="js/speech.js"></script>
+    <script src="js/conversation.js"></script>
+    <script src="js/interview.js"></script>
+    <script src="js/codeEditor.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
